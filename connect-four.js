@@ -62,19 +62,20 @@ window.addEventListener('DOMContentLoaded', ev=>{
     player1.addEventListener('keyup',checkPlayerStatus);
     player2.addEventListener('keyup',checkPlayerStatus);
 
-    clickTargets.addEventListener("click", ev => {
+    // clickTargets.addEventListener("click", ev => {
+    clickTargets.childNodes.forEach(x => x.addEventListener("click", ev => {
         let colIndex = Number(ev.target.id.slice(ev.target.id.length-1));
         if (!game.isColumnFull(colIndex)){
             game.playInColumn(colIndex);
             updateUI();
         }
-    })
+    }))
+
+    // })
 
     clickTargets.addEventListener("mouseover", ev => {
         let colIndex = Number(ev.target.id.slice(ev.target.id.length-1));
         if (ev.target.className == "click-target" && !game.isColumnFull(colIndex)) {
-            // console.log(ev.target.className.includes('click-target'))
-
             showPlayerColor(game.firstPlayer, ev.target);
         }
     })

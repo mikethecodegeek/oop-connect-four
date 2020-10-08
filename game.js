@@ -1,4 +1,5 @@
 import Column from "./column.js";
+// import ColumnWinInspector from "./column-win-inspector.js";
 
 export default class Game {
     constructor(player1,player2) {
@@ -16,7 +17,17 @@ export default class Game {
 
     playInColumn(index) {
         this.columns[index].add(this.firstPlayer);
-        this.checkForTie();
+        if(!this.checkForTie()){
+            for (let i = 0; i < 7; i++) {
+                if (this.columns[i].inspect()) {
+                    const clickTarget = document.getElementById("click-targets");
+                    clickTarget.setAttribute("style", "visibility: hidden;");
+                    this.winnerNumber = this.columns[i].inspect();
+                    return true;
+                }
+            }
+        }
+
         if(this.firstPlayer == 1) {
             this.firstPlayer = 2;
         } else {
@@ -27,6 +38,8 @@ export default class Game {
         for (let i =0; i < 7; i++) {
             if (this.isColumnFull(i) === false) return false;
         }
+        const clickTarget = document.getElementById("click-targets");
+        clickTarget.setAttribute("style", "visibility: hidden;");
         this.winnerNumber = 3;
         return true;
     }
@@ -34,6 +47,10 @@ export default class Game {
     getName() {
         if (this.winnerNumber===3) {
             return `${this.player1} ties with ${this.player2}`
+        } else if (this.winnerNumber === 1) {
+            return `${this.player1.toUpperCase()} WON!!!`
+        } else if (this.winnerNumber === 2) {
+            return `${this.player2.toUpperCase()} WON!!!`
         }
         return `${this.player1} vs ${this.player2}`
     }
