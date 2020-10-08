@@ -15,9 +15,13 @@ window.addEventListener('DOMContentLoaded', ev=>{
 
     const showPlayerColor = (player, target) => {
         if (player == 1) {
-            target.setAttribute("class","click-target black")
+            // target.setAttribute("class","click-target black")
+            target.classList.add('black');
+            target.clasList.remove('red')
         } else {
-            target.setAttribute("class","click-target red");
+            // target.setAttribute("class","click-target red");
+            target.classList.add('red');
+            target.clasList.remove('black')
         }
     }
 
@@ -44,6 +48,7 @@ window.addEventListener('DOMContentLoaded', ev=>{
                 }
             }
         }
+        
     }
 
     const checkPlayerStatus = () =>{
@@ -59,13 +64,17 @@ window.addEventListener('DOMContentLoaded', ev=>{
 
     clickTargets.addEventListener("click", ev => {
         let colIndex = Number(ev.target.id.slice(ev.target.id.length-1));
-        game.playInColumn(colIndex);
-        updateUI();
+        if (!game.isColumnFull(colIndex)){
+            game.playInColumn(colIndex);
+            updateUI();
+        }
     })
 
     clickTargets.addEventListener("mouseover", ev => {
-        if (ev.target.className == "click-target") {
-            console.log(ev.target.className.includes('click-target'))
+        let colIndex = Number(ev.target.id.slice(ev.target.id.length-1));
+        if (ev.target.className == "click-target" && !game.isColumnFull(colIndex)) {
+            // console.log(ev.target.className.includes('click-target'))
+
             showPlayerColor(game.firstPlayer, ev.target);
         }
     })

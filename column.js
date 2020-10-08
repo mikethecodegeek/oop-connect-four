@@ -4,10 +4,16 @@ export default class Column {
     }
 
     add(playerNumber) {
-        this.tokens.push(playerNumber);
+        if (!this.isFull()){
+            this.tokens.push(playerNumber);
+        }
     }
 
     getTokenAt(rowIndex) {
         return this.tokens[rowIndex];
+    }
+
+    isFull() {
+        return this.tokens.length == 6;
     }
 }

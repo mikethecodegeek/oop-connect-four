@@ -9,6 +9,10 @@ export default class Game {
             new Column(), new Column(), new Column(), new Column()];
     }
 
+    isColumnFull(columnIndex) {
+        return this.columns[columnIndex].isFull();
+    }
+
     playInColumn(index) {
         this.columns[index].add(this.firstPlayer);
 
