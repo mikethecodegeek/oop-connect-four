@@ -49,15 +49,16 @@ window.addEventListener('DOMContentLoaded', ev=>{
 
     clickTargets.addEventListener("mouseover", ev => {
         if (ev.target.className == "click-target") {
+            console.log(ev.target.className.includes('click-target'))
             showPlayerColor(game.firstPlayer, ev.target);
         }
     })
 
-    clickTargets.addEventListener("mouseleave", ev => {
-        if (ev.target.className == "click-target") {
+    clickTargets.childNodes.forEach(x => x.addEventListener("mouseleave", ev => {
+        if (ev.target.className.includes("click-target")) {
             ev.target.setAttribute("class", "click-target");
         }
-    })
+    }))
 
     newGame.addEventListener('click', ev=>{
         game = new Game(player1.value,player2.value)
