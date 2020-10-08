@@ -15,14 +15,32 @@ export default class Game {
         return this.columns[columnIndex].isFull();
     }
 
+    inspectRows(){
+        for (let a=0; a< 6; a++) {
+            for(let b=0; b<3; b++) {
+                if (this.getTokenAt(a,b)== this.getTokenAt(a,b+1) && 
+                this.getTokenAt(a,b)== this.getTokenAt(a,b+2) &&
+                this.getTokenAt(a,b)== this.getTokenAt(a,b+3)) 
+                {
+                    return this.getTokenAt(a,b);
+                }
+            }
+        }
+        return 0;
+    }
+
     playInColumn(index) {
         this.columns[index].add(this.firstPlayer);
+        const clickTarget = document.getElementById("click-targets");
         if(!this.checkForTie()){
             for (let i = 0; i < 7; i++) {
                 if (this.columns[i].inspect()) {
-                    const clickTarget = document.getElementById("click-targets");
                     clickTarget.setAttribute("style", "visibility: hidden;");
                     this.winnerNumber = this.columns[i].inspect();
+                    return true;
+                } else if (this.inspectRows()) {
+                    clickTarget.setAttribute("style", "visibility: hidden;");
+                    this.winnerNumber = this.inspectRows();
                     return true;
                 }
             }
