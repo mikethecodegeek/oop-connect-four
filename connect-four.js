@@ -28,6 +28,21 @@ window.addEventListener('DOMContentLoaded', ev=>{
             boardHolder.classList.remove('is-invisible');
             gameName.innerHTML = `${game.getName()}`
             let currentPlayer = game.firstPlayer;
+            for (let i = 0; i <= 5; i++) {
+                for (let j = 0; j <=6; j++) {
+                    const cell = document.getElementById(`square-${5-i}-${j}`);
+                    cell.innerHTML = "";
+                    const token = game.getTokenAt(i, j);
+                    const div = document.createElement("div");
+                    if (token === 1) {
+                        div.setAttribute("class", "token black");
+                        cell.appendChild(div);
+                    } else if (token ===2 ) {
+                        div.setAttribute("class", "token red");
+                        cell.appendChild(div);
+                    }
+                }
+            }
         }
     }
 
@@ -43,7 +58,8 @@ window.addEventListener('DOMContentLoaded', ev=>{
     player2.addEventListener('keyup',checkPlayerStatus);
 
     clickTargets.addEventListener("click", ev => {
-        game.playInColumn();
+        let colIndex = Number(ev.target.id.slice(ev.target.id.length-1));
+        game.playInColumn(colIndex);
         updateUI();
     })
 
