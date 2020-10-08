@@ -17,7 +17,7 @@ export default class Game {
 
     inspectRows(){
         for (let a=0; a< 6; a++) {
-            for(let b=0; b<3; b++) {
+            for(let b=0; b<4; b++) {
                 if (this.getTokenAt(a,b)== this.getTokenAt(a,b+1) && 
                 this.getTokenAt(a,b)== this.getTokenAt(a,b+2) &&
                 this.getTokenAt(a,b)== this.getTokenAt(a,b+3)) 
@@ -26,6 +26,28 @@ export default class Game {
                 }
             }
         }
+        return 0;
+    }
+
+    inspectDiags(){
+        for (let a=0; a< 3; a++) {
+            for(let b=0; b<4; b++) {
+                if (this.getTokenAt(a,b)== this.getTokenAt(a+1,b+1) && 
+                this.getTokenAt(a,b)== this.getTokenAt(a+2,b+2) &&
+                this.getTokenAt(a,b)== this.getTokenAt(a+3,b+3)) 
+                {
+                    return this.getTokenAt(a,b);
+                }
+            }
+            for (let c=3; c<7; c++) {
+                if (this.getTokenAt(a,c)== this.getTokenAt(a+1,c-1) && 
+                this.getTokenAt(a,c)== this.getTokenAt(a+2,c-2) &&
+                this.getTokenAt(a,c)== this.getTokenAt(a+3,c-3)) 
+                {
+                    return this.getTokenAt(a,c);
+                }
+            }
+        }       
         return 0;
     }
 
@@ -41,6 +63,10 @@ export default class Game {
                 } else if (this.inspectRows()) {
                     clickTarget.setAttribute("style", "visibility: hidden;");
                     this.winnerNumber = this.inspectRows();
+                    return true;
+                }else if (this.inspectDiags()) {
+                    clickTarget.setAttribute("style", "visibility: hidden;");
+                    this.winnerNumber = this.inspectDiags();
                     return true;
                 }
             }
