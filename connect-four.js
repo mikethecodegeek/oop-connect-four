@@ -17,11 +17,11 @@ window.addEventListener('DOMContentLoaded', ev=>{
         if (player == 1) {
             // target.setAttribute("class","click-target black")
             target.classList.add('black');
-            target.clasList.remove('red')
+            target.classList.remove('red')
         } else {
             // target.setAttribute("class","click-target red");
             target.classList.add('red');
-            target.clasList.remove('black')
+            target.classList.remove('black')
         }
     }
 
@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', ev=>{
                 }
             }
         }
-        
+
     }
 
     const checkPlayerStatus = () =>{
