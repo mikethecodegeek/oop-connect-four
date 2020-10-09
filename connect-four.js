@@ -60,6 +60,23 @@ window.addEventListener('DOMContentLoaded', ev=>{
 
     }
 
+    let addToken = (colIndex) => {
+        let token = document.createElement("div");
+        let cell = game.columns[colIndex].tokens.length-1;
+      
+        if (game.firstPlayer === 1) {
+            token.setAttribute("class", `token red animated${5-cell}`);
+        } else {
+            token.setAttribute("class", `token black animated${5-cell}`);
+        }
+
+
+        let square = document.getElementById(`square-${5-cell}-${colIndex}`);
+
+        square.appendChild(token);
+        gameName.innerHTML = `${game.getName()}`
+    }
+
     const checkPlayerStatus = () =>{
         if(player1.value !== '' && player2.value !== '') {
             newGame.removeAttribute('disabled');
@@ -76,6 +93,7 @@ window.addEventListener('DOMContentLoaded', ev=>{
         let colIndex = Number(ev.target.id.slice(ev.target.id.length-1));
         if (!game.isColumnFull(colIndex)){
             game.playInColumn(colIndex);
+            addToken(colIndex);
             // updateUI();
         }
     }))
@@ -117,4 +135,5 @@ window.addEventListener('DOMContentLoaded', ev=>{
         newGame.setAttribute('disabled','true');
         updateUI();
     }
+
 })

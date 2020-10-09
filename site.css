@@ -98,27 +98,91 @@ main {
   
 }
 
-.animated {
+.animated1 {
   animation-name: slideDown;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 @keyframes slideDown {
 	0% {
+		transform: translateY(-200%);
+	}
+
+	100% {
+		transform: translateY(0%);
+	}		
+}
+
+.animated2 {
+  animation-name: slideDown2;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes slideDown2 {
+	0% {
+		transform: translateY(-300%);
+	}
+
+	100% {
+		transform: translateY(0%);
+	}		
+}
+
+.animated3 {
+  animation-name: slideDown3;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes slideDown3 {
+	0% {
+		transform: translateY(-400%);
+	}
+	
+	100% {
+		transform: translateY(0%);
+	}		
+}
+
+.animated4 {
+  animation-name: slideDown4;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes slideDown4 {
+	0% {
+		transform: translateY(-500%);
+	}
+
+	100% {
+		transform: translateY(0%);
+	}		
+}
+
+.animated5 {
+  animation-name: slideDown5;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes slideDown5 {
+	0% {
+		transform: translateY(-600%);
+	}
+
+	100% {
+		transform: translateY(0%);
+	}		
+}
+
+.animated0 {
+  animation-name: slideDown0;
+  animation-duration: .4s;
+  animation-fill-mode: forwards;
+}
+@keyframes slideDown0 {
+	0% {
 		transform: translateY(-100%);
 	}
-	50%{
-		transform: translateY(8%);
-	}
-	65%{
-		transform: translateY(-4%);
-	}
-	80%{
-		transform: translateY(4%);
-	}
-	95%{
-		transform: translateY(-2%);
-	}			
+
 	100% {
 		transform: translateY(0%);
 	}		
