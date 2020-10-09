@@ -54,6 +54,11 @@ export default class Game {
     playInColumn(index) {
         this.columns[index].add(this.firstPlayer);
         const clickTarget = document.getElementById("click-targets");
+        if(this.firstPlayer == 1) {
+            this.firstPlayer = 2;
+        } else {
+            this.firstPlayer = 1;
+        }
         if(!this.checkForTie()){
             for (let i = 0; i < 7; i++) {
                 if (this.columns[i].inspect()) {
@@ -75,11 +80,7 @@ export default class Game {
             }
         }
 
-        if(this.firstPlayer == 1) {
-            this.firstPlayer = 2;
-        } else {
-            this.firstPlayer = 1;
-        }
+
 
         this.save();
     }
