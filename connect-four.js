@@ -1,4 +1,5 @@
 import Game from './game.js';
+import Column from "./column.js";
 
 let game = undefined;
 
@@ -88,10 +89,24 @@ window.addEventListener('DOMContentLoaded', ev=>{
 
     newGame.addEventListener('click', ev=>{
         game = new Game(player1.value,player2.value)
+        console.log(game);
         newGame.setAttribute('disabled','true');
         updateUI();
     })
 
-
-
+    if(localStorage.getItem("game")){
+        const savedGame = JSON.parse(localStorage.getItem("game"))
+        game = new Game(savedGame.player1,savedGame.player2);
+        game.columns = [];
+        for (let i = 0; i< 7; i++) {
+            let col = new Column();
+            col.tokens = savedGame.columns[i].tokens;
+            game.columns.push(col);
+        }
+        game.firstPlayer = savedGame.firstPlayer;
+        // console.log(game1);
+        // console.log(savedGame);
+        newGame.setAttribute('disabled','true');
+        updateUI();
+    }
 })
