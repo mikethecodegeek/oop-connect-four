@@ -26,6 +26,14 @@ window.addEventListener('DOMContentLoaded', ev=>{
         }
     }
 
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+          currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+      }
+
     let updateUI = () =>{
         if (game == undefined) {
             boardHolder.classList.add('is-invisible');
@@ -68,7 +76,7 @@ window.addEventListener('DOMContentLoaded', ev=>{
         let colIndex = Number(ev.target.id.slice(ev.target.id.length-1));
         if (!game.isColumnFull(colIndex)){
             game.playInColumn(colIndex);
-            updateUI();
+            // updateUI();
         }
     }))
 
